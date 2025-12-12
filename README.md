@@ -14,3 +14,7 @@ No Work Update
 
 10/December/2025
 No Work Update
+
+
+crwaler->indexer->tf-idf->web html ui
+
