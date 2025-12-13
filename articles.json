@@ -1,0 +1,392 @@
+[
+  {
+    "topic": "1. DDoS Attack",
+    "queries": [
+      "What is a DDoS attack?",
+      "How does a DDoS attack work?"
+    ],
+    "articles": [
+      {
+        "unique_id": "ddos_001",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.cloudflare.com/learning/ddos/what-is-a-ddos-attack/",
+        "title": "What is a distributed denial-of-service (DDoS) attack? | Cloudflare"
+      },
+      {
+        "unique_id": "ddos_002",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.kaspersky.com/resource-center/preemptive-safety/how-does-ddos-attack-work",
+        "title": "Distributed Denial of Service: How DDoS Attacks Work | Kaspersky"
+      },
+      {
+        "unique_id": "ddos_003",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://cmitsolutions.com/blog/what-is-a-ddos-attack/",
+        "title": "What Is a DDoS Attack and How Does It Work? | CMIT Solutions"
+      },
+      {
+        "unique_id": "ddos_004",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.secpod.com/blog/understanding-ddos-attacks-a-comprehensive-guide/",
+        "title": "Understanding DDoS Attacks: A Comprehensive Guide | SecPod"
+      },
+      {
+        "unique_id": "ddos_005",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.imperva.com/learn/ddos/ddos-attacks/",
+        "title": "DDoS Attack Types & Mitigation Methods | Imperva"
+      }
+    ]
+  },
+  {
+    "topic": "2. Phishing",
+    "queries": [
+      "What is phishing in cybersecurity?",
+      "How can I protect myself from phishing emails?"
+    ],
+    "articles": [
+      {
+        "unique_id": "phish_001",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.ibm.com/think/topics/phishing",
+        "title": "What is Phishing? | IBM"
+      },
+      {
+        "unique_id": "phish_002",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.bitsight.com/blog/guide-to-phishing",
+        "title": "A Guide to Phishing: Examples, Prevention, & More | Bitsight"
+      },
+      {
+        "unique_id": "phish_003",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://guidebooks.google.com/online-security/learn-about-security-threats/what-is-phishing",
+        "title": "What is Phishing? - Guidebooks with Google"
+      },
+      {
+        "unique_id": "phish_004",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.staysafeonline.org/articles/phishing",
+        "title": "What Is Phishing and How To Avoid It | Stay Safe Online"
+      },
+      {
+        "unique_id": "phish_005",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/teach-employees-avoid-phishing",
+        "title": "Teach Employees to Avoid Phishing | CISA"
+      }
+    ]
+  },
+  {
+    "topic": "3. SQL Injection",
+    "queries": [
+      "What is SQL injection?",
+      "How do attackers perform SQL injection?"
+    ],
+    "articles": [
+      {
+        "unique_id": "sqli_001",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://learn.snyk.io/lesson/sql-injection/",
+        "title": "What is SQL injection (SQLi)? | Tutorial & examples - Snyk Learn"
+      },
+      {
+        "unique_id": "sqli_002",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.cloudflare.com/learning/security/threats/sql-injection/",
+        "title": "What is SQL injection? | Cloudflare"
+      },
+      {
+        "unique_id": "sqli_003",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://portswigger.net/web-security/sql-injection",
+        "title": "What is SQL Injection? Tutorial & Examples | Web Security Academy"
+      },
+      {
+        "unique_id": "sqli_004",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.blackduck.com/glossary/what-is-sql-injection.html",
+        "title": "What Is SQL Injection and How Does It Work? | Black Duck"
+      },
+      {
+        "unique_id": "sqli_005",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://owasp.org/www-community/attacks/SQL_Injection",
+        "title": "SQL Injection | OWASP Foundation"
+      }
+    ]
+  },
+  {
+    "topic": "4. Malware",
+    "queries": [
+      "What is malware?",
+      "What are the common types of malware?"
+    ],
+    "articles": [
+      {
+        "unique_id": "mal_001",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.malwarebytes.com/malware",
+        "title": "What is Malware? Definition, Types and Protection | Malwarebytes"
+      },
+      {
+        "unique_id": "mal_002",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.titanfile.com/blog/types-of-computer-malware/",
+        "title": "The Comprehensive Guide to 12 Types of Malware | TitanFile"
+      },
+      {
+        "unique_id": "mal_003",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.wallarm.com/what/malware-types-and-detection",
+        "title": "What is Malware? Types and Examples | Wallarm"
+      },
+      {
+        "unique_id": "mal_004",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.mcafee.com/support/s/article/000001575?language=en_US",
+        "title": "Differences between viruses, ransomware, worms, and trojans | McAfee"
+      },
+      {
+        "unique_id": "mal_005",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.dell.com/support/kbdoc/en-pk/000132699/what-are-the-different-types-of-viruses-spyware-and-malware-that-can-infect-my-computer",
+        "title": "What Are the Different Types of Viruses, Spyware and Malware? | Dell"
+      }
+    ]
+  },
+  {
+    "topic": "5. Firewall",
+    "queries": [
+      "What is a firewall?",
+      "How does a firewall protect a network?"
+    ],
+    "articles": [
+      {
+        "unique_id": "fw_001",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.fortinet.com/resources/cyberglossary/firewall",
+        "title": "What Is a Firewall? Definition and Types of Firewall | Fortinet"
+      },
+      {
+        "unique_id": "fw_002",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.kaspersky.com/resource-center/definitions/firewall",
+        "title": "What is a firewall? Definition and explanation | Kaspersky"
+      },
+      {
+        "unique_id": "fw_003",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://en.wikipedia.org/wiki/Firewall_(computing)",
+        "title": "Firewall (computing) - Wikipedia"
+      },
+      {
+        "unique_id": "fw_004",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.checkpoint.com/cyber-hub/network-security/what-is-firewall/5-types-of-firewalls-which-one-do-you-need/",
+        "title": "5 Types of Firewalls: Which One Do You Need? | Check Point"
+      },
+      {
+        "unique_id": "fw_005",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.geeksforgeeks.org/computer-networks/types-of-network-firewall/",
+        "title": "Types of Network Firewall | GeeksforGeeks"
+      }
+    ]
+  },
+  {
+    "topic": "6. Encryption",
+    "queries": [
+      "What is encryption?",
+      "Why is encryption important in cybersecurity?"
+    ],
+    "articles": [
+      {
+        "unique_id": "enc_001",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.cloudflare.com/learning/ssl/what-is-encryption/",
+        "title": "What is encryption? | Cloudflare"
+      },
+      {
+        "unique_id": "enc_002",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://us.norton.com/blog/privacy/what-is-encryption",
+        "title": "What is encryption? How it works + types of encryption | Norton"
+      },
+      {
+        "unique_id": "enc_003",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://cloud.google.com/learn/what-is-encryption",
+        "title": "What is encryption and how does it work? | Google Cloud"
+      },
+      {
+        "unique_id": "enc_004",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.ibm.com/think/topics/encryption",
+        "title": "What is encryption? | IBM"
+      },
+      {
+        "unique_id": "enc_005",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://preyproject.com/blog/types-of-encryption-symmetric-or-asymmetric-rsa-or-aes",
+        "title": "Symmetric vs asymmetric encryption: when to use each | Prey Project"
+      }
+    ]
+  },
+  {
+    "topic": "7. Two-Factor Authentication (2FA)",
+    "queries": [
+      "What is two-factor authentication?",
+      "Why should I use 2FA?"
+    ],
+    "articles": [
+      {
+        "unique_id": "2fa_001",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/about-two-factor-authentication",
+        "title": "About two-factor authentication | GitHub Docs"
+      },
+      {
+        "unique_id": "2fa_002",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.oloid.com/blog/uses-of-two-factor-authentication",
+        "title": "What is Two-Factor Authentication (2FA): A Complete Guide | OLOID"
+      },
+      {
+        "unique_id": "2fa_003",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.eset.com/blog/en/what-is/what-is-2fa-how-it-works/",
+        "title": "What is 2FA, how it works, and why it matters | ESET"
+      },
+      {
+        "unique_id": "2fa_004",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.twilio.com/docs/glossary/what-is-two-factor-authentication-2fa",
+        "title": "What is Two Factor Authentication? | Twilio"
+      },
+      {
+        "unique_id": "2fa_005",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.mcafee.com/learn/the-importance-of-two-factor-authentication-to-your-security/",
+        "title": "The Importance of Two-Factor Authentication to Your Security | McAfee"
+      }
+    ]
+  },
+  {
+    "topic": "8. Cloud Security",
+    "queries": [
+      "What is cloud security?",
+      "How can cloud services be protected from attacks?"
+    ],
+    "articles": [
+      {
+        "unique_id": "cld_001",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.citrix.com/glossary/what-is-cloud-security.html",
+        "title": "What is Cloud Security? | Citrix"
+      },
+      {
+        "unique_id": "cld_002",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.kaspersky.com/resource-center/definitions/what-is-cloud-security",
+        "title": "What is Cloud Security? Types, Risks, and Solutions | Kaspersky"
+      },
+      {
+        "unique_id": "cld_003",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.freecodecamp.org/news/learn-cloud-security-fundamentals-in-aws-a-guide-for-beginners/",
+        "title": "Learn Cloud Security Fundamentals in AWS | freeCodeCamp"
+      },
+      {
+        "unique_id": "cld_004",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://blog.trace3.com/understanding-cloud-security-what-it-is-and-why-it-matters",
+        "title": "Understanding Cloud Security: What It Is and Why It Matters | Trace3"
+      },
+      {
+        "unique_id": "cld_005",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.wiz.io/academy/cloud-security/cloud-security-best-practices",
+        "title": "Cloud Security Best Practices | Wiz"
+      }
+    ]
+  },
+  {
+    "topic": "9. IoT Security",
+    "queries": [
+      "What is IoT security?",
+      "How can IoT devices be secured?"
+    ],
+    "articles": [
+      {
+        "unique_id": "iot_001",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.kaspersky.com/resource-center/preemptive-safety/best-practices-for-iot-security",
+        "title": "Internet of Things security challenges and best practices | Kaspersky"
+      },
+      {
+        "unique_id": "iot_002",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.digitalmatter.com/blog/iot-security-challenges-and-solutions-for-businesses",
+        "title": "IoT Security: Challenges and Solutions for Businesses | Digital Matter"
+      },
+      {
+        "unique_id": "iot_003",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.fortinet.com/resources/cyberglossary/iot-security",
+        "title": "What Is IoT Security? Challenges and Requirements | Fortinet"
+      },
+      {
+        "unique_id": "iot_004",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://deepstrike.io/blog/iot-hacking-statistics",
+        "title": "IoT Hacking Statistics 2025: Threats, Risks & Regulations | DeepStrike"
+      },
+      {
+        "unique_id": "iot_005",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://ajprotech.com/blog/consumer-electronics/top-10-vulnerabilities-and-risks-in-iot-device-security.html",
+        "title": "Top 10 Vulnerabilities and Risks in IoT Device Security | AJProTech"
+      }
+    ]
+  },
+  {
+    "topic": "10. Cybersecurity Basics",
+    "queries": [
+      "What is cybersecurity?",
+      "What are the common threats in cybersecurity?"
+    ],
+    "articles": [
+      {
+        "unique_id": "basic_001",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.ftc.gov/system/files/attachments/cybersecurity-small-business/cybersecuirty_sb_factsheets_all.pdf",
+        "title": "CYBERSECURITY BASICS | FTC"
+      },
+      {
+        "unique_id": "basic_002",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://us.norton.com/blog/how-to/cybersecurity-basics",
+        "title": "Cybersecurity basics for beginners: A guide | Norton"
+      },
+      {
+        "unique_id": "basic_003",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://www.geeksforgeeks.org/ethical-hacking/cyber-security-tutorial/",
+        "title": "Cyber Security Tutorial | GeeksforGeeks"
+      },
+      {
+        "unique_id": "basic_004",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://jbs.live/top-10-cyber-security-threats-every-business-should-prepare-for-in-2025/",
+        "title": "Top 10 Cyber Security Threats Every Business Should Prepare for in 2025 | JBS"
+      },
+      {
+        "unique_id": "basic_005",
+        "timestamp": "2025-12-13T20:10:00Z",
+        "url": "https://medium.com/@mvspavs/top-10-cybersecurity-threats-everyone-should-know-in-2025-b37350f33c68",
+        "title": "Top 10 Cybersecurity Threats Everyone Should Know in 2025 | Medium"
+      }
+    ]
+  }
+]
