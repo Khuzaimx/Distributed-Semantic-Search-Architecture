@@ -19,4 +19,5 @@ No Work Update
 crwaler->indexer->tf-idf->web html ui
 
 indexer has to index all the data in numbers list form
+after that tf-idf will be applied on all the articles to find the best articles for each querry
 
