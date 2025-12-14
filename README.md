@@ -18,3 +18,5 @@ No Work Update
 
 crwaler->indexer->tf-idf->web html ui
 
+indexer has to index all the data in numbers list form
+
