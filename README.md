@@ -22,4 +22,5 @@ TF-IDF idea
 
 indexer has to index all the data in numbers list form
 after that tf-idf will be applied on all the articles to find the best articles for each querry
+query_processor is taking user query storing it in a trie, removing useless words from it and passing it to invert indexer
 
