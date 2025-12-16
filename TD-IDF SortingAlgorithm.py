@@ -1,14 +1,10 @@
-"""
-TF-IDF Ranking Module
-Uses: list, dict, tuple, set, Counter
-"""
+
 import math
 from collections import Counter
 from typing import List, Dict, Tuple
 from indexer import ArticleIndexer, Article
 
 class TFIDFRanker:
-    """TF-IDF based ranking system"""
     
     def __init__(self, indexer: ArticleIndexer):
         self.indexer = indexer
@@ -16,7 +12,6 @@ class TFIDFRanker:
         self._calculate_idf()
     
     def _calculate_idf(self) -> None:
-        """Pre-calculate IDF values for all words"""
         total_docs = self.indexer.total_articles
         
         for word in self.indexer.all_words_set:
@@ -46,17 +41,11 @@ class TFIDFRanker:
         return tf * idf
     
     def _tokenize_query(self, query: str) -> List[str]:
-        """Tokenize query into words"""
         import re
         words = re.findall(r'\b[a-z]+\b', query.lower())
         return words
     
     def rank_articles(self, query: str, top_k: int = 10, min_score: float = 0.001) -> List[Tuple[Article, float]]:
-        """
-        Rank articles based on query using TF-IDF
-        Returns list of tuples: (Article, score) sorted by score descending
-        Only returns articles with score above minimum threshold
-        """
         query_words = self._tokenize_query(query)
         
         if not query_words:
@@ -86,8 +75,6 @@ class TFIDFRanker:
                     if word in article.title.lower() or self.idf_cache.get(word, 0) > 2.0:
                         important_word_matches += 1
             
-            # Only include articles that match at least one important query word
-            # or have significant overall score
             if matched_words > 0 and (important_word_matches > 0 or score > 0.05):
                 # Boost score if multiple query words match, especially important ones
                 boost = 1 + (matched_words / len(query_words)) * 0.5
@@ -106,14 +93,10 @@ class TFIDFRanker:
         if not sorted_articles:
             return []
         
-        # Get top score to calculate relative threshold
         top_score = sorted_articles[0][1]
         
-        # Dynamic threshold: show articles with score >= 5% of top score
-        # This ensures we show more relevant articles
+
         dynamic_threshold = max(min_score, top_score * 0.05)
-        
-        # Return top K articles with scores above threshold
         results = []
         for article_id, score in sorted_articles:
             # Only filter out if score is very low and we already have good results
@@ -129,6 +112,5 @@ class TFIDFRanker:
         return results
     
     def get_top_articles_for_query(self, query: str, limit: int = 5) -> List[Article]:
-        """Get top ranked articles for a query"""
         ranked = self.rank_articles(query, top_k=limit)
         return [article for article, score in ranked]
