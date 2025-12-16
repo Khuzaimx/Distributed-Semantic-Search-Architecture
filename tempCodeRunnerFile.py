@@ -4,26 +4,42 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import time
 
-class Crawler:
+class SimpleCrawler:
     def __init__(self):
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
         self.results = []
         
-    def get_page_title(self, url):
-        """Extract title from a webpage"""
+    def get_page_info(self, url):
+        """Extract title and content from a webpage"""
         try:
             response = requests.get(url, headers=self.headers, timeout=10)
             soup = BeautifulSoup(response.content, 'html.parser')
             
+            # Get title
+            title = "No title found"
             if soup.title:
-                return soup.title.string.strip()
-            return "No title found"
+                title = soup.title.string.strip()
+            
+            # Get content - simple approach
+            # Remove scripts and styles
+            for script in soup(["script", "style"]):
+                script.decompose()
+            
+            # Get text
+            content = soup.get_text()
+            
+            # Clean up whitespace
+            lines = (line.strip() for line in content.splitlines())
+            chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+            content = ' '.join(chunk for chunk in chunks if chunk)
+            
+            return title, content[:50000]  # Limit content size
             
         except Exception as e:
             print(f"Error fetching {url}: {e}")
-            return "Error fetching title"
+            return "Error fetching page", f"Error details: {str(e)}"
     
     def crawl_topic(self, topic_name, queries, urls):
         """Process URLs for a specific topic"""
@@ -38,7 +54,7 @@ class Crawler:
         for idx, url in enumerate(urls):
             print(f"  [{idx+1}/{len(urls)}] Fetching: {url}")
             
-            title = self.get_page_title(url)
+            title, content = self.get_page_info(url)
             
             prefix = topic_name.split('.')[0].strip()
             unique_id = f"article_{prefix}_{idx+1:03d}"
@@ -47,7 +63,8 @@ class Crawler:
                 "unique_id": unique_id,
                 "timestamp": datetime.utcnow().isoformat() + 'Z',
                 "url": url,
-                "title": title
+                "title": title,
+                "content": content  # <-- Content is added here
             }
             
             topic_data["articles"].append(article)
@@ -55,15 +72,16 @@ class Crawler:
         
         return topic_data
     
-    def save_results(self, filename="articles.json"):
+    def save_results(self, filename="articles_full.json"):
         """Save to JSON file"""
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(self.results, f, indent=2, ensure_ascii=False)
         print(f"\nSaved to {filename}")
 
 
+
 def main():
-    crawler = Crawler()
+    crawler = SimpleCrawler()
     
     topics = [
         {
@@ -186,8 +204,8 @@ def main():
         )
         crawler.results.append(topic_data)
     
-    crawler.save_results()
-    print("\nDone! Crawled all topics.")
+    crawler.save_results("articles_with_content.json")
+    print("\nDone! All article content has been saved.")
 
 
 if __name__ == "__main__":
