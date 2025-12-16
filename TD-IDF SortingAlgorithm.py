@@ -1,4 +1,3 @@
-
 import math
 from collections import Counter
 from typing import List, Dict, Tuple
@@ -24,18 +23,15 @@ class TFIDFRanker:
                 self.idf_cache[word] = 0.0
     
     def _calculate_tf(self, word: str, article_id: str) -> float:
-        """Calculate Term Frequency for a word in an article"""
         word_freq = self.indexer.get_article_word_freq(article_id)
         total_words = sum(word_freq.values())
         
         if total_words == 0:
             return 0.0
         
-        # TF = count of word / total words in document
         return word_freq.get(word.lower(), 0) / total_words
     
     def _calculate_tfidf(self, word: str, article_id: str) -> float:
-        """Calculate TF-IDF score for a word in an article"""
         tf = self._calculate_tf(word, article_id)
         idf = self.idf_cache.get(word.lower(), 0.0)
         return tf * idf
@@ -51,7 +47,6 @@ class TFIDFRanker:
         if not query_words:
             return []
         
-        # Filter stop words (common words that don't add meaning)
         stop_words = {'what', 'is', 'a', 'an', 'the', 'how', 'does', 'do', 'are', 'can', 'i', 'you', 'we', 'they', 'this', 'that', 'these', 'those', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'from', 'by', 'about', 'into', 'through', 'during', 'including', 'against', 'among', 'throughout', 'despite', 'towards', 'upon', 'concerning', 'to', 'of', 'in', 'for', 'on', 'at', 'by', 'with', 'from', 'up', 'about', 'into', 'through', 'during', 'including', 'against', 'among', 'throughout', 'despite', 'towards', 'upon', 'concerning', 'attack', 'attacks'}  # Remove 'attack' as it's too common
         query_words = [w for w in query_words if w not in stop_words and len(w) > 2]
         
@@ -71,19 +66,16 @@ class TFIDFRanker:
                 if word_score > 0:
                     score += word_score
                     matched_words += 1
-                    # Check if this is an important word (appears in title or has high IDF)
                     if word in article.title.lower() or self.idf_cache.get(word, 0) > 2.0:
                         important_word_matches += 1
             
             if matched_words > 0 and (important_word_matches > 0 or score > 0.05):
-                # Boost score if multiple query words match, especially important ones
                 boost = 1 + (matched_words / len(query_words)) * 0.5
                 if important_word_matches > 0:
                     boost += important_word_matches * 0.3
                 score = score * boost
                 article_scores[article.unique_id] = score
         
-        # Sort articles by score (descending)
         sorted_articles = sorted(
             article_scores.items(),
             key=lambda x: x[1],
@@ -95,7 +87,6 @@ class TFIDFRanker:
         
         top_score = sorted_articles[0][1]
         
-
         dynamic_threshold = max(min_score, top_score * 0.05)
         results = []
         for article_id, score in sorted_articles:
