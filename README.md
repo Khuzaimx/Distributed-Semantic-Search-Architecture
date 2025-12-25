@@ -34,4 +34,5 @@ open terminal type pip install -r requirements.txt hit enter
 then after installation type python main.py
 
 The crawler needs to be dynamic, we will have to make all our flow dynamic then
+the system speed should be optimized
 
