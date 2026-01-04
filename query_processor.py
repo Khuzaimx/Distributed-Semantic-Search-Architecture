@@ -2,33 +2,7 @@ from typing import List, Set, Optional
 from collections import deque
 import re
 
-class TrieNode:
-    
-    def __init__(self):
-        self.children = {}
-        self.is_end_of_word = False
-class Trie:
-    
-    def __init__(self):
-        self.root=TrieNode()
-    
-    def insert(self, word: str) -> None:
-        
-        node = self.root
-        for char in word.lower():
-            if char not in node.children:
-                node.children[char] = TrieNode()
-            node = node.children[char]
-        node.is_end_of_word = True
-    
-    def search(self, word: str) -> bool:
-        
-        node = self.root
-        for char in word.lower():
-            if char not in node.children:
-                return False
-            node = node.children[char]
-        return node.is_end_of_word
+from data_structures import Trie
 
 class QueryProcessor:
     
