@@ -674,9 +674,9 @@ class SearchEngineGUI:
         # Perform search in background
         def search():
             start_time = time.time()
-            ranked_results = self.ranker.rank_articles(query, top_k=15, min_score=0.001)
+            ranked_results, suggestion = self.ranker.rank_articles(query, top_k=15, min_score=0.001)
             elapsed = time.time() - start_time
-            self.root.after(0, lambda: self._display_results(query, ranked_results, elapsed))
+            self.root.after(0, lambda: self._display_results(query, ranked_results, elapsed, suggestion))
         
         thread = threading.Thread(target=search, daemon=True)
         thread.start()
@@ -706,7 +706,7 @@ class SearchEngineGUI:
             self.clear_btn.grid_remove()
             self.compact_clear_btn.grid_remove()
     
-    def _display_results(self, query: str, ranked_results, elapsed_time):
+    def _display_results(self, query: str, ranked_results, elapsed_time, suggestion=None):
         """Display search results in modern format"""
         # Switch to results mode
         self._switch_to_results_mode()
@@ -714,6 +714,35 @@ class SearchEngineGUI:
         # Clear previous results
         for widget in self.results_scrollable_frame.winfo_children():
             widget.destroy()
+        
+        # Did you mean suggestion
+        if suggestion:
+            suggestion_frame = ctk.CTkFrame(self.results_scrollable_frame, fg_color="transparent")
+            suggestion_frame.pack(fill="x", pady=(0, 20))
+            
+            did_mean_label = ctk.CTkLabel(
+                suggestion_frame,
+                text="Did you mean: ",
+                font=ctk.CTkFont(size=14, weight="normal"),
+                text_color="#ea4335"
+            )
+            did_mean_label.pack(side="left")
+            
+            suggestion_link = ctk.CTkLabel(
+                suggestion_frame,
+                text=suggestion,
+                font=ctk.CTkFont(size=14, weight="bold", underline=True),
+                text_color="#1a0dab",
+                cursor="hand2"
+            )
+            suggestion_link.pack(side="left")
+            
+            # Click handler for suggestion
+            def on_suggestion_click(e):
+                self.search_var.set(suggestion)
+                self._perform_search()
+                
+            suggestion_link.bind("<Button-1>", on_suggestion_click)
         
         if not ranked_results:
             no_results = ctk.CTkFrame(self.results_scrollable_frame, fg_color="transparent")
@@ -838,9 +867,9 @@ class SearchEngineGUI:
         # Perform search in background
         def search():
             start_time = time.time()
-            ranked_results = self.ranker.rank_articles(query, top_k=15, min_score=0.001)
+            ranked_results, suggestion = self.ranker.rank_articles(query, top_k=15, min_score=0.001)
             elapsed = time.time() - start_time
-            self.root.after(0, lambda: self._display_results(query, ranked_results, elapsed))
+            self.root.after(0, lambda: self._display_results(query, ranked_results, elapsed, suggestion))
         
         thread = threading.Thread(target=search, daemon=True)
         thread.start()

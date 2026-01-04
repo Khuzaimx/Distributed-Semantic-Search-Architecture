@@ -3,10 +3,36 @@ Advanced Data Structures Implementation
 Implements: Stack, Queue, Tree, Graph
 """
 from collections import deque
-from typing import List, Dict, Set, Optional, Any, TYPE_CHECKING
+from typing import List, Dict, Set, Optional, Any, TYPE_CHECKING, Tuple
 
 if TYPE_CHECKING:
     from indexer import Article
+
+
+def levenshtein_distance(s1: str, s2: str) -> int:
+    """
+    Calculate the Levenshtein distance between two strings.
+    This is the minimum number of single-character edits (insertions, deletions, or substitutions)
+    required to change one word into the other.
+    """
+    if len(s1) < len(s2):
+        return levenshtein_distance(s2, s1)
+
+    # len(s1) >= len(s2)
+    if len(s2) == 0:
+        return len(s1)
+
+    previous_row = range(len(s2) + 1)
+    for i, c1 in enumerate(s1):
+        current_row = [i + 1]
+        for j, c2 in enumerate(s2):
+            insertions = previous_row[j + 1] + 1
+            deletions = current_row[j] + 1
+            substitutions = previous_row[j] + (c1 != c2)
+            current_row.append(min(insertions, deletions, substitutions))
+        previous_row = current_row
+    
+    return previous_row[-1]
 
 
 class Stack:
@@ -322,3 +348,57 @@ class TopicTree:
             return node.get_all_articles()
         return []
 
+# ==================== TRIE ====================
+class TrieNode:
+    """Node for Trie data structure"""
+    
+    def __init__(self):
+        self.children: Dict[str, TrieNode] = {}
+        self.is_end_of_word: bool = False
+
+
+class Trie:
+    """Trie (Prefix Tree) implementation for efficient string retrieval"""
+    
+    def __init__(self):
+        self.root = TrieNode()
+    
+    def insert(self, word: str) -> None:
+        """Insert a word into the trie"""
+        node = self.root
+        for char in word.lower():
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.is_end_of_word = True
+    
+    def search(self, word: str) -> bool:
+        """Check if word exists in trie"""
+        node = self.root
+        for char in word.lower():
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return node.is_end_of_word
+
+    def starts_with(self, prefix: str) -> bool:
+        """Check if any word in trie starts with prefix"""
+        node = self.root
+        for char in prefix.lower():
+            if char not in node.children:
+                return False
+            node = node.children[char]
+        return True
+
+    def collect_all_words(self) -> List[str]:
+        """Collect all words in the trie"""
+        words = []
+        self._collect_words_recursive(self.root, "", words)
+        return words
+    
+    def _collect_words_recursive(self, node: TrieNode, current_prefix: str, words: List[str]) -> None:
+        if node.is_end_of_word:
+            words.append(current_prefix)
+        
+        for char, child_node in node.children.items():
+            self._collect_words_recursive(child_node, current_prefix + char, words)

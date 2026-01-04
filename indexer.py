@@ -3,7 +3,7 @@ import json
 import re
 from collections import deque, OrderedDict, defaultdict, Counter, namedtuple
 from typing import List, Dict, Set, Tuple, Optional
-from data_structures import Stack, Queue, BinarySearchTree, Graph, TopicTree
+from data_structures import Stack, Queue, BinarySearchTree, Graph, TopicTree, Trie
 from query_processor import QueryProcessor
 
  
@@ -32,6 +32,7 @@ class ArticleIndexer:
         self.article_graph: Graph = Graph(directed=False)  
         self.article_graph: Graph = Graph(directed=False)  
         self.topic_tree: TopicTree = TopicTree()  
+        self.vocabulary_trie: Trie = Trie()
         self.query_processor: QueryProcessor = QueryProcessor()
         
     def _tokenize(self, text: str) -> List[str]:
@@ -137,7 +138,15 @@ class ArticleIndexer:
         self._build_inverted_index()
         print(f"Indexed {len(self.all_words_set)} unique words")
         
+        print("Building vocabulary trie...")
+        self._build_vocabulary_trie()
+        
         print("Indexing complete!")
+
+    def _build_vocabulary_trie(self) -> None:
+        """Build Trie for all words in vocabulary"""
+        for word in self.all_words_set:
+            self.vocabulary_trie.insert(word)
     
     def get_article(self, article_id: str) -> Article:
        
