@@ -11,6 +11,7 @@ from data_structures import Stack, Queue, BinarySearchTree, Graph
 from navigation import NavigationHistory
 from web_searcher import WebSearcher
 from crawler3 import SimpleCrawler
+from history_manager import HistoryManager
 
  
 ctk.set_appearance_mode("light")
@@ -113,12 +114,13 @@ class SearchEngineGUI:
         self.web_searcher = WebSearcher()
         self.crawler = SimpleCrawler()
         
-        # Query history using deque
-        self.query_history = deque(maxlen=10)
+        # Query history from persistent storage
+        self.query_history = deque(HistoryManager.load_history(), maxlen=20)
         
         # Current search results
         self.current_results = []
         self.current_query = ""
+        self.current_sort_option = "Relevance"
         
         # Search suggestions
         self.suggestions = []
@@ -510,13 +512,37 @@ class SearchEngineGUI:
         self.progress_bar.set(0)
         self.progress_bar.place_forget() # Hide initially
 
+        # --- Options Bar (Sorting, etc.) ---
+        self.options_frame = ctk.CTkFrame(self.results_frame, height=50, fg_color="white", corner_radius=0)
+        self.options_frame.grid(row=1, column=0, sticky="ew")
+        self.options_frame.grid_columnconfigure(0, weight=1)
+        
+        # Sort Dropdown
+        self.sort_var = ctk.StringVar(value="Relevance")
+        self.sort_combo = ctk.CTkComboBox(
+            self.options_frame, 
+            values=["Relevance", "Newest", "Oldest", "A-z"],
+            command=self._on_sort_change,
+            width=120,
+            state="readonly",
+            font=ctk.CTkFont(size=12)
+        )
+        self.sort_combo.pack(side="right", padx=(0, 150), pady=10)
+        
+        sort_label = ctk.CTkLabel(self.options_frame, text="Sort by:", font=ctk.CTkFont(size=12), text_color="#5f6368")
+        sort_label.pack(side="right", padx=(0, 10), pady=10)
+
+        # Status Label (Searching web...)
+        self.results_label = ctk.CTkLabel(self.options_frame, text="", font=ctk.CTkFont(size=12, slant="italic"), text_color="#6366f1")
+        self.results_label.pack(side="left", padx=20)
+
         # Results Area
         self.results_scrollable_frame = ctk.CTkScrollableFrame(
             self.results_frame,
             fg_color="white",
             corner_radius=0
         )
-        self.results_scrollable_frame.grid(row=1, column=0, sticky="nsew", padx=150) # Left margin like Google
+        self.results_scrollable_frame.grid(row=2, column=0, sticky="nsew", padx=150) # Left margin like Google
         self.results_scrollable_frame.grid_columnconfigure(0, weight=1)
 
         # Initialize in Home Mode
@@ -536,7 +562,22 @@ class SearchEngineGUI:
     
     def _navigate_suggestions(self, direction):
         """Navigate suggestions with arrow keys"""
-        pass
+        if not self.suggestion_window or not self.suggestions:
+            return
+            
+        # TODO: Implement proper selection visual state
+        # For now, just setting text to next suggestion as basic nav
+        current_text = self.search_var.get()
+        try:
+            if current_text in self.suggestions:
+                idx = self.suggestions.index(current_text)
+                new_idx = (idx + 1) if direction == 'down' else (idx - 1)
+                new_idx = max(0, min(new_idx, len(self.suggestions) - 1))
+                self.search_var.set(self.suggestions[new_idx])
+            else:
+                 self.search_var.set(self.suggestions[0])
+        except ValueError:
+            pass
 
     def _on_home_text_change(self, *args):
         if self.search_var.get():
@@ -564,9 +605,9 @@ class SearchEngineGUI:
         self._hide_suggestions()
         self.current_query = query
         
-        # Add to history using deque
-        if query not in self.query_history:
-            self.query_history.append(query)
+        # Add to history using manager
+        if query and query not in self.query_history:
+             self.query_history = deque(HistoryManager.add_to_history(query), maxlen=20)
         
         # Add to navigation history (uses Queue and Stack internally)
         self.navigation_history.add_query(query)
@@ -626,8 +667,9 @@ class SearchEngineGUI:
     
     def _show_search_loading(self):
         """Show loading state during search"""
-        self.results_label.configure(text="Searching...")
-        self.empty_state.grid_remove()
+        if hasattr(self, 'results_label'):
+             self.results_label.configure(text="Searching...")
+        
         for widget in self.results_scrollable_frame.winfo_children():
             widget.destroy()
     
@@ -839,6 +881,14 @@ class SearchEngineGUI:
         """Display search results in modern Google format"""
         self._switch_to_results_mode()
         
+        # Store for sorting
+        self.current_results = ranked_results
+        
+        # Sort if needed (default is Relevance which is already sorted by score)
+        if self.current_sort_option != "Relevance":
+             self._sort_results()
+             ranked_results = self.current_results
+        
         # Stop loading
         if hasattr(self, 'progress_bar'):
             self.progress_bar.stop()
@@ -924,3 +974,25 @@ class SearchEngineGUI:
             ArticleViewer3(self.root, article)
         else:
             ArticleViewer1(self.root, article)
+    def _on_sort_change(self, choice):
+        """Handle sort option change"""
+        self.current_sort_option = choice
+        if self.current_results:
+             # Redisplay (will trigger sorting)
+             # We pass 0 as time since we are just re-ordering
+             self._display_results(self.current_query, self.current_results, 0.0)
+
+    def _sort_results(self):
+        """Sort current results in place based on option"""
+        if not self.current_results:
+            return
+
+        if self.current_sort_option == "Newest":
+             # Sort by timestamp (descending)
+             # Handle missing timestamps by treating them as old
+             self.current_results.sort(key=lambda x: x.article.timestamp if x.article.timestamp else "", reverse=True)
+        elif self.current_sort_option == "Oldest":
+             self.current_results.sort(key=lambda x: x.article.timestamp if x.article.timestamp else "9999")
+        elif self.current_sort_option == "A-z":
+             self.current_results.sort(key=lambda x: x.article.title)
+        # Relevance is default (no sort needed as ranker returns sorted)
